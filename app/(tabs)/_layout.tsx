@@ -1,12 +1,17 @@
-import { useColorScheme } from '@/hooks/useColorScheme';
+
+import tw from '@/assets/lib/tailwind';
+import { useTheme } from '@react-navigation/native';
 import { Tabs } from 'expo-router';
 import React from 'react';
-import { Image, Platform, StyleSheet } from 'react-native';
+import { Image, Platform, StyleSheet, Text } from 'react-native';
 
 export default function TabLayout() {
-  const colorScheme = useColorScheme();
-  const activeColor = '#FFFFFF';
-  const inactiveColor = 'rgba(255, 255, 255, 0.5)';
+  const { colors, dark } = useTheme();
+
+  // Colors that adapt to theme
+  const tabBarBackground = dark ? '#1a1a1a' : '#007BFF'; // Changed to white for light mode
+  const activeColor = dark ? '#FFFFFF' : '#FFFFFF'; // Blue for light, white for dark
+  const inactiveColor = dark ? 'rgba(255, 255, 255, 0.5)' : '#FFFFFF'; // Darker inactive for light mode
 
   return (
     <Tabs
@@ -16,8 +21,9 @@ export default function TabLayout() {
         tabBarShowLabel: true,
         headerShown: false,
         tabBarStyle: {
-          backgroundColor: '#007BFF',
-          borderTopWidth: 0,
+          backgroundColor: tabBarBackground,
+          borderTopWidth: dark ? 0 : 1,
+          borderTopColor: dark ? undefined : '#e5e5e5',
           paddingTop: 10,
           height: Platform.OS === 'ios' ? 90 : 70,
           paddingBottom: Platform.OS === 'ios' ? 20 : 10,
@@ -28,13 +34,16 @@ export default function TabLayout() {
       <Tabs.Screen
         name="index"
         options={{
-          title: 'Home',
+          tabBarLabel: ({ focused }) => focused ? (
+            <Text style={[tw`font-semibold`, { color: activeColor }]}>Home</Text>
+          ) : null,
           tabBarIcon: ({ focused }) => (
             <Image
               source={require('@/assets/images/home.png')}
               style={{
 
                 tintColor: focused ? activeColor : inactiveColor,
+                opacity: focused ? 1 : 0.3,
               }}
             />
           ),
@@ -45,67 +54,69 @@ export default function TabLayout() {
       <Tabs.Screen
         name="Post"
         options={{
-          title: 'Post',
+          tabBarLabel: ({ focused }) => focused ? <Text style={[tw`font-semibold`, { color: activeColor }]}>Post</Text> : null,
           tabBarIcon: ({ focused }) => (
             <Image
               source={require('@/assets/images/post.png')}
               style={{
 
                 tintColor: focused ? activeColor : inactiveColor,
+                opacity: focused ? 1 : 0.3,
               }}
             />
           ),
         }}
       />
 
-
-      {/* Post Tab */}
+      {/* Generate Tab */}
       <Tabs.Screen
         name="Genarate"
         options={{
-          title: 'Genarate',
+          tabBarLabel: ({ focused }) => focused ? <Text style={[tw`font-semibold`, { color: activeColor }]}>Generate</Text> : null,
           tabBarIcon: ({ focused }) => (
             <Image
               source={require('@/assets/images/genarete.png')}
               style={{
 
                 tintColor: focused ? activeColor : inactiveColor,
+                opacity: focused ? 1 : 0.3,
               }}
             />
           ),
         }}
       />
 
-
-
       {/* Schedule Tab */}
       <Tabs.Screen
         name="Schedule"
         options={{
-          title: 'Schedule',
+          tabBarLabel: ({ focused }) => focused ? <Text style={[tw`font-semibold`, { color: activeColor }]}>Schedule</Text> : null,
           tabBarIcon: ({ focused }) => (
             <Image
               source={require('@/assets/images/schedul.png')}
               style={{
 
                 tintColor: focused ? activeColor : inactiveColor,
+                opacity: focused ? 1 : 0.3,
               }}
             />
           ),
         }}
       />
 
-      {/* Account Tab */}
+
       <Tabs.Screen
         name="Account"
         options={{
-          title: 'Account',
+          tabBarLabel: ({ focused }) => focused ? <Text style={[tw`font-semibold`, { color: activeColor }]}>Account</Text> : null,
           tabBarIcon: ({ focused }) => (
             <Image
               source={require('@/assets/images/user.png')}
               style={{
-
+                width: 24,
+                height: 24,
                 tintColor: focused ? activeColor : inactiveColor,
+                opacity: focused ? 1 : 0.3,
               }}
             />
           ),

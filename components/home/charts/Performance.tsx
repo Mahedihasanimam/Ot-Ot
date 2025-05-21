@@ -1,10 +1,12 @@
+import { useTheme } from '@react-navigation/native';
 import React, { useState } from 'react';
-import { Dimensions, Text, TouchableWithoutFeedback, View } from 'react-native';
+import { Text, TouchableWithoutFeedback, View } from 'react-native';
 import tw from 'twrnc';
 
 const PerformanceChart = () => {
+    const { dark, colors } = useTheme();
     const [activeIndex, setActiveIndex] = useState<number | null>(null);
-    const screenWidth = Dimensions.get('window').width;
+
 
     const chartData = [
         { month: 'Jan', value: 20 },
@@ -19,7 +21,7 @@ const PerformanceChart = () => {
     const maxBarHeight = 180; // Maximum height you want bars to reach (for 100% value)
 
     return (
-        <View style={tw`bg-white rounded-xl p-4 mt-4 shadow-lg shadow-gray-500 mb-6`}>
+        <View style={tw`${dark ? 'bg-[#3D3D3D]' : 'bg-white'} rounded-xl p-4 mt-4 shadow-lg shadow-gray-500 mb-6`}>
             <View style={tw`flex-row justify-between items-end h-[${maxBarHeight + 40}px]`}>
                 {chartData.map((item, index) => {
                     const barHeight = (item.value / maxValue) * maxBarHeight;
@@ -34,23 +36,23 @@ const PerformanceChart = () => {
                             <View style={tw`items-center`}>
                                 {/* Tooltip showing the header text */}
                                 {isActive && (
-                                    <View style={tw`absolute -top-18 bg-[#FFFFFF] px-3 py-2 rounded-md w-34 shadow-lg`}>
+                                    <View style={tw`absolute -top-18 ${dark ? 'bg-[#3D3D3D]' : 'bg-whitecolor'} px-3 py-2 rounded-md w-34 shadow-lg`}>
                                         <View style={tw`flex flex-row items-center justify-between gap-2`}>
                                             <View>
                                                 <Text style={tw`text-2xl`}>🙂</Text>
                                             </View>
                                             <View>
 
-                                                <Text style={tw`text-[#000000] text-lg font-semibold`}>2k views</Text>
-                                                <Text style={tw`text-[#00000060] text-sm font-medium`}>April, 2025</Text>
+                                                <Text style={tw`${dark ? 'text-white' : 'text-title'} text-lg font-semibold`}>2k views</Text>
+                                                <Text style={tw`${dark ? 'text-white' : 'text-title'} text-sm font-medium`}>April, 2025</Text>
                                             </View>
                                         </View>
-                                        <View style={tw`absolute -bottom-1 left-4 w-3 h-3 bg-white -ml-1.5 rotate-45`} />
+                                        <View style={tw`absolute -bottom-1 left-4 w-3 h-3 ${dark ? 'bg-[#3D3D3D]' : 'bg-whitecolor'} -ml-1.5 rotate-45`} />
                                     </View>
                                 )}
 
                                 {/* Bar with shadow */}
-                                <View style={tw`bg-gray-50 h-[200px] justify-end`}>
+                                <View style={tw`${dark ? 'bg-[#777777]' : 'bg-whitecolor'} h-[200px] justify-end`}>
                                     <View
                                         style={[
                                             tw`w-12 bg-blue-500 rounded-t`, // the bar itself

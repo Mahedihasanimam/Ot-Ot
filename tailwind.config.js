@@ -18,9 +18,11 @@ module.exports = {
       },
 
       colors: {
+        whitecolor: "#FFFFFF",
         primary: "#007BFF",
-        title: "#272727",
-        subT: "#5e5e5e",
+        title: "#000000",
+        subT: "#888888",
+        graybg: "#3D3D3D",
         offWhite: "#E6ECEC",
         secondary: "#F4FAFA",
         white100: "#EFEFEF",

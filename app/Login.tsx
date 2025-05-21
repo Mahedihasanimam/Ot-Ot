@@ -1,11 +1,13 @@
 import tw from '@/assets/lib/tailwind';
 import BackButtonOnlyIcon from '@/components/util/BackButtonOnlyIcon';
 import InputBox from '@/components/util/InputBox';
+import { useTheme } from '@react-navigation/native';
 import { useNavigation } from 'expo-router';
 import React, { useState } from 'react';
 import { Image, Pressable, Text, TouchableOpacity, View } from 'react-native';
 
 const Login = () => {
+    const { dark, colors } = useTheme();
     const navigation = useNavigation<any>();
     const [formData, setFormData] = useState({
         email: '',
@@ -19,7 +21,7 @@ const Login = () => {
     };
 
     return (
-        <View style={tw`flex-1 bg-white px-6 py-10`}>
+        <View style={[tw`flex-1 px-6 py-10`, { backgroundColor: colors.background }]}>
             <BackButtonOnlyIcon />
 
             {/* Logo */}
@@ -32,7 +34,14 @@ const Login = () => {
             </View>
 
             {/* Title */}
-            <Text style={tw`text-xl font-bold text-center mb-6`}>Login to your account</Text>
+            <Text
+                style={[
+                    tw`text-xl font-bold text-center mb-6`,
+                    { color: colors.text },
+                ]}
+            >
+                Login to your account
+            </Text>
 
             {/* Email */}
             <InputBox
@@ -41,13 +50,10 @@ const Login = () => {
                 value={formData.email}
                 onChangeText={handleChange('email')}
                 prefixIcon={
-                    <Image
-                        source={require('@/assets/images/email.png')}
-
-                    />
+                    <Image source={require('@/assets/images/email.png')} />
                 }
-                containerStyle="h-[50px] border border-black rounded-full px-4 my-2"
-                textStyle="text-base"
+                containerStyle="h-[50px] border border-gray-500 rounded-full px-4 my-2"
+                textStyle={dark ? 'text-white' : 'text-black'}
             />
 
             {/* Password */}
@@ -57,34 +63,26 @@ const Login = () => {
                 value={formData.password}
                 onChangeText={handleChange('password')}
                 prefixIcon={
-                    <Image
-                        source={require('@/assets/images/lock.png')}
-
-                    />
+                    <Image source={require('@/assets/images/lock.png')} />
                 }
                 suffixIcon={
                     <TouchableOpacity onPress={() => setPasswordVisible(!passwordVisible)}>
-                        {passwordVisible ? (
-                            <Image
-                                source={require('@/assets/images/eye.png')}
-
-                            />
-                        ) : (
-                            <Image
-                                source={require('@/assets/images/eyeclose.png')}
-
-                            />
-                        )}
+                        <Image
+                            source={
+                                passwordVisible
+                                    ? require('@/assets/images/eye.png')
+                                    : require('@/assets/images/eyeclose.png')
+                            }
+                        />
                     </TouchableOpacity>
                 }
                 secureTextEntry={!passwordVisible}
-                containerStyle="h-[50px] border border-black rounded-full px-4 my-2"
-                textStyle="text-base"
+                containerStyle="h-[50px] border border-gray-500 rounded-full px-4 my-2 ${"
+                textStyle={dark ? 'text-white' : 'text-black'}
             />
 
-            {/* Remember Me */}
+            {/* Remember Me and Forgot Password */}
             <View style={tw`flex-row items-center justify-between mt-3`}>
-                {/* Checkbox and label */}
                 <View style={tw`flex-row items-center`}>
                     <TouchableOpacity
                         onPress={() => setRememberMe(!rememberMe)}
@@ -93,19 +91,19 @@ const Login = () => {
                         <View
                             style={tw.style(
                                 `w-5 h-5 border rounded`,
-                                rememberMe ? 'bg-black' : 'bg-white'
+                                rememberMe ? 'bg-primary' : 'bg-white'
                             )}
                         />
                     </TouchableOpacity>
-                    <Text style={tw`text-black font-normal text-sm`}>Remember me</Text>
+                    <Text style={[tw`text-sm`, { color: colors.text }]}>Remember me</Text>
                 </View>
 
-                {/* Forgot Password */}
                 <Pressable onPress={() => navigation.navigate('ForgetPassword')}>
-                    <Text style={tw`text-black font-normal text-sm`}>Forgot Password?</Text>
+                    <Text style={[tw`text-sm`, { color: colors.primary }]}>
+                        Forgot Password?
+                    </Text>
                 </Pressable>
             </View>
-
 
             {/* Login Button */}
             <TouchableOpacity
@@ -118,7 +116,7 @@ const Login = () => {
             {/* OR Divider */}
             <View style={tw`flex-row items-center my-8`}>
                 <View style={tw`flex-1 h-px bg-gray-300`} />
-                <Text style={tw`mx-3 text-gray-500`}>or</Text>
+                <Text style={[tw`mx-3`, { color: colors.text }]}>or</Text>
                 <View style={tw`flex-1 h-px bg-gray-300`} />
             </View>
 
@@ -130,14 +128,16 @@ const Login = () => {
                     source={{ uri: 'https://img.icons8.com/color/48/000000/google-logo.png' }}
                     style={tw`w-5 h-5 mr-2`}
                 />
-                <Text style={tw`text-black font-medium`}>Continue with Google</Text>
+                <Text style={[tw`font-medium`, { color: colors.text }]}>
+                    Continue with Google
+                </Text>
             </TouchableOpacity>
 
             {/* Register Link */}
-            <View style={tw` flex-row justify-center mt-[50%]`}>
-                <Text style={tw`text-[#6D6D6D]`}>Don't have an account? </Text>
+            <View style={tw`flex-row justify-center mt-[50%]`}>
+                <Text style={[tw`mr-1`, { color: colors.text }]}>Don't have an account?</Text>
                 <Pressable onPress={() => navigation.navigate('Register')}>
-                    <Text style={tw`text-black font-bold`}>Register here</Text>
+                    <Text style={[tw`font-bold`, { color: colors.primary }]}>Register here</Text>
                 </Pressable>
             </View>
         </View>

@@ -1,3 +1,4 @@
+import { useTheme } from '@react-navigation/native';
 import React, { useState } from 'react';
 import {
     KeyboardTypeOptions,
@@ -35,7 +36,7 @@ const InputBox: React.FC<InputBoxProps> = ({
     toggleVisibilityIcon,
 }) => {
     const [isPasswordVisible, setIsPasswordVisible] = useState(false);
-
+    const { dark } = useTheme()
     const keyboardType: KeyboardTypeOptions =
         type === 'email' ? 'email-address' :
             type === 'number' ? (Platform.OS === 'ios' ? 'numbers-and-punctuation' : 'numeric') :

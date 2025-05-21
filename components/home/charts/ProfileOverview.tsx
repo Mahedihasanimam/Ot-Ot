@@ -1,4 +1,5 @@
 import Button from '@/components/util/Button';
+import { useTheme } from '@react-navigation/native';
 import React from 'react';
 import { Alert, Image, ScrollView, Text, View } from 'react-native';
 import tw from 'twrnc';
@@ -18,14 +19,15 @@ const icons = {
 };
 
 const ProfileOverview = () => {
+  const { dark } = useTheme();
 
   const handleCreatePost = () => {
     Alert.alert('Create Post', 'Your post has been created successfully.');
   }
   return (
-    <ScrollView style={tw`bg-white  pt-4`} showsVerticalScrollIndicator={false}>
+    <ScrollView style={tw`${dark ? 'bg-[#3D3D3D]' : 'bg-white'}  pt-4`} showsVerticalScrollIndicator={false}>
       {/* Profile Overview Header */}
-      <Text style={tw`text-xl font-bold mb-4 text-gray-800`}>Profile Overview</Text>
+      <Text style={tw`text-xl font-bold mb-4 ${dark ? 'text-white' : 'text-[#343A40]'}`}>Profile Overview</Text>
 
       {/* Metrics Cards */}
       <View style={tw`mb-4`}>
