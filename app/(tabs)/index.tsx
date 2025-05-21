@@ -28,11 +28,6 @@ const HomeScreen = () => {
           </View>
         </View>
 
-
-
-
-
-
         {/* Recent posts */}
         <View>
           <Text style={tw`text-[16px] text-[#000000] font-semibold mt-8`}>
