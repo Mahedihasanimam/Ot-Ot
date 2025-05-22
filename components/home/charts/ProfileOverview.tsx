@@ -1,5 +1,6 @@
 import Button from '@/components/util/Button';
 import { useTheme } from '@react-navigation/native';
+import { useNavigation } from 'expo-router';
 import React from 'react';
 import { Alert, Image, ScrollView, Text, View } from 'react-native';
 import tw from 'twrnc';
@@ -19,6 +20,7 @@ const icons = {
 };
 
 const ProfileOverview = () => {
+  const navigation = useNavigation();
   const { dark } = useTheme();
 
   const handleCreatePost = () => {
@@ -112,7 +114,7 @@ const ProfileOverview = () => {
 
       {/* Create Post Button */}
 
-      <Button label="+ Create post" onPress={handleCreatePost} buttonStyle="bg-primary rounded-full p-4 mt-2" textStyle="text-white text-[18px] font-semibold text-center font-semibold" />
+      <Button label="+ Create post" onPress={() => navigation.navigate('Post')} buttonStyle="bg-primary rounded-full p-4 mt-2" textStyle="text-white text-[18px] font-semibold text-center font-semibold" />
     </ScrollView>
   );
 };

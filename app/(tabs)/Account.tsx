@@ -25,7 +25,7 @@ const Account = () => {
         <ScrollView style={[tw`flex-1 ${dark ? 'bg-[#1E1E1E]' : 'bg-white'} `]}>
             <Button label="Profile Setting" onPress={() => { }} buttonStyle='bg-primary py-5 mt-8 rounded-full mx-4' textStyle='text-white text-center text-[18px] font-semibold' />
 
-            <View style={tw` items-center p-6 border border-[#00000033] mx-4 my-4 rounded-lg ${dark ? 'bg-[#3D3D3D]' : 'bg-white'} `}>
+            <View style={tw` items-center h-[220px] p-6 border border-[#00000033] mx-4 my-4 rounded-lg ${dark ? 'bg-[#3D3D3D]' : 'bg-white'} `}>
 
                 <Image source={require('../../assets/images/avater.png')} style={tw`w-20 h-20 rounded-full`} />
                 <View style={tw`flex-1 text-center`}>
