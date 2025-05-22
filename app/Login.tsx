@@ -21,7 +21,7 @@ const Login = () => {
     };
 
     return (
-        <View style={[tw`flex-1 px-6 py-10`, { backgroundColor: colors.background }]}>
+        <View style={[tw`flex-1 px-6 py-10 ${dark ? 'bg-[#1E1E1E]' : 'bg-white'}`]}>
             <BackButtonOnlyIcon />
 
             {/* Logo */}
