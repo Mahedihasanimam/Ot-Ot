@@ -1,12 +1,13 @@
 import Button from '@/components/util/Button';
 import { useTheme } from '@react-navigation/native';
 import * as ImagePicker from 'expo-image-picker';
+import { useNavigation } from 'expo-router';
 import React, { useRef, useState } from 'react';
 import { Alert, Image, Modal, ScrollView, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import tw from 'twrnc';
 
 const Post = () => {
-
+  const navigation = useNavigation();
   const { colors, dark } = useTheme();
   const [activeTab, setActiveTab] = useState('Upload media');
   const [caption, setCaption] = useState('');
@@ -56,10 +57,7 @@ const Post = () => {
   };
 
   const handleGenerate = () => {
-    if (!prompt) {
-      Alert.alert('Missing Prompt !', 'Please enter a description first');
-      return;
-    }
+    navigation.navigate('GenaretedContent');
 
     const generationData = {
       prompt,

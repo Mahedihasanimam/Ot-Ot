@@ -1,6 +1,6 @@
 import { useTheme } from '@react-navigation/native';
 import React, { useState } from 'react';
-import { ScrollView, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import { Image, ScrollView, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import tw from 'twrnc';
 
 const Genarate = () => {
@@ -83,7 +83,11 @@ const Genarate = () => {
 
                 style={tw`bg-white border border-[#00000033] py-3 rounded-full items-center mb-4`}
             >
-                <Text style={tw`text-[#007BFF] font-medium text-base`}>   Use this copy</Text>
+                <View style={tw`flex flex-row items-center `}>
+                    <Image source={require('../../assets/images/coppy.png')} />
+
+                    <Text style={tw`text-[#007BFF] font-medium text-base`}>   Use this copy</Text>
+                </View>
             </TouchableOpacity>
 
 
