@@ -1,5 +1,6 @@
 import Button from '@/components/util/Button';
 import DateTimePicker from '@react-native-community/datetimepicker';
+import { useTheme } from '@react-navigation/native';
 import * as Calendar from 'expo-calendar';
 import React, { useEffect, useState } from 'react';
 import { Alert, Platform, ScrollView, Text, TouchableOpacity, View } from 'react-native';
@@ -14,6 +15,7 @@ interface UpcomingPost {
 }
 
 const Schedule: React.FC = () => {
+    const { dark, colors } = useTheme();
     const [selectedDate, setSelectedDate] = useState<string>('2025-08-17');
     const [showTimePicker, setShowTimePicker] = useState<boolean>(false);
     const [frequency, setFrequency] = useState<'Daily' | 'Weekly' | 'Custom'>('Daily');
@@ -114,7 +116,7 @@ const Schedule: React.FC = () => {
     };
 
     return (
-        <ScrollView style={tw`p-4 bg-white`}>
+        <ScrollView style={tw`p-4 ${dark ? 'bg-[#1E1E1E]' : 'bg-white'}`}>
             <Button
                 label="Social Media Schedule"
                 onPress={() => { }}

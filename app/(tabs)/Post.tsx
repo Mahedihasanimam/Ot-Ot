@@ -1,18 +1,24 @@
 import Button from '@/components/util/Button';
 import { useTheme } from '@react-navigation/native';
 import * as ImagePicker from 'expo-image-picker';
-import React, { useState } from 'react';
-import { Alert, Image, ScrollView, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import React, { useRef, useState } from 'react';
+import { Alert, Image, Modal, ScrollView, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import tw from 'twrnc';
 
 const Post = () => {
+
   const { colors, dark } = useTheme();
   const [activeTab, setActiveTab] = useState('Upload media');
   const [caption, setCaption] = useState('');
   const [prompt, setPrompt] = useState('');
   const [selectedImage, setSelectedImage] = useState(null);
   const [boostOption, setBoostOption] = useState('');
-
+  const [Boostmodal, setBoostmodal] = useState(false);
+  const [days, setDays] = useState('');
+  const [cardNumber, setCardNumber] = useState('');
+  const [expiry, setExpiry] = useState('');
+  const [cvc, setCvc] = useState('');
+  const boostSheetRef = useRef(null);
   const pickImage = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.All,
@@ -26,9 +32,14 @@ const Post = () => {
     }
   };
 
+  const handleBoost = () => {
+    setBoostmodal(true);
+  };
+
+
   const handleUpload = () => {
     if (!selectedImage) {
-      Alert.alert('Error', 'Please select an image first');
+      Alert.alert('Missing Image !', 'Please select an image first');
       return;
     }
 
@@ -46,7 +57,7 @@ const Post = () => {
 
   const handleGenerate = () => {
     if (!prompt) {
-      Alert.alert('Error', 'Please enter a description first');
+      Alert.alert('Missing Prompt !', 'Please enter a description first');
       return;
     }
 
@@ -162,6 +173,7 @@ const Post = () => {
           <View style={tw`flex flex-row items-center justify-end`}>
 
             <TouchableOpacity
+              onPressIn={handleBoost}
               style={tw`${dark ? 'bg-[#3D3D3D] border border-[#c0c0c033]' : 'bg-white border border-[#007BFF]'} rounded-full p-4 mt-4 mr-2 w-[120px] flex flex-col items-center justify-end`}
               onPress={() => console.log('Saved:', { caption, selectedImage, boostOption })}
             >
@@ -222,6 +234,133 @@ const Post = () => {
           </View>
         </View>
       )}
+
+
+      {
+        Boostmodal && (
+          <Modal
+            visible={Boostmodal}
+
+            onRequestClose={() => setBoostmodal(false)}
+            transparent={true}
+            animationType="slide"
+          >
+            {/* Outer container that covers entire screen */}
+            <View style={tw`flex-1 justify-end bg-[#00000080]`}>
+              {/* Actual modal content */}
+              <View style={tw`${dark ? 'bg-[#1E1E1E]' : 'bg-white'}   max-h-[650x]  border-t-8  border-t-[#007BFF] rounded-t-lg  `}>
+                <View style={tw` rounded-t-lg `}>
+                  <Text style={tw`text-[18px] font-bold bg-[#007BFF] w-full text-white text-center py-2  `}>Boost your post</Text>
+
+                  <View style={tw`${dark ? 'bg-[#1E1E1E]' : 'bg-white'} rounded-lg px-6   `}>
+                    {/* Header */}
+                    {/* Amount Section */}
+                    <View style={tw`mb-6 text-center`}>
+                      <Text style={tw`text-[40px] pb-2 font-bold mb-2 text-center mt-4 ${dark ? 'text-white' : 'text-[#000000]'}`}>$0.00</Text>
+                      <Text style={tw`text-[18px] font-normal mb-2 ${dark ? 'text-white' : 'text-[#000000]'} `}>For how many days?</Text>
+                      <TextInput
+                        style={tw`border rounded-full p-4 border-gray-300  mt-2 text-lg ${dark ? 'bg-[#3D3D3D] text-white' : 'bg-white text-[#000000]'}`}
+                        placeholder="Type here..."
+                        keyboardType="numeric"
+                        value={days}
+                        onChangeText={setDays}
+                      />
+                    </View>
+
+                    <View style={tw` `} />
+
+                    {/* Card Information */}
+                    <View style={tw`mb-4`}>
+                      <Text style={tw`text-[16px] font-medium mb-4 ${dark ? 'text-white' : 'text-[#4B2E2B]'}`}>Card Information</Text>
+
+                      <View style={tw`mb-4`}>
+
+                        <View style={tw`flex-row items-center`}>
+                          <TextInput
+                            style={tw`flex-1 border border-gray-300 p-3 rounded-t-md ${dark ? 'bg-[#3D3D3D] text-white' : 'bg-white text-[#000000]'}`}
+                            placeholder="Card number"
+                            keyboardType="numeric"
+                            value={cardNumber}
+                            onChangeText={setCardNumber}
+                          />
+                          {/* <Image
+                            source={require('@/assets/images/visa.png')}
+                            style={tw`w-12 h-8 ml-2`}
+                            resizeMode="contain"
+                          /> */}
+                        </View>
+                      </View>
+
+                      <View style={tw`flex-row justify-between`}>
+                        <View style={tw`w-1/2 pr-2`}>
+
+                          <TextInput
+                            style={tw`border border-gray-300 p-3 ${dark ? 'bg-[#3D3D3D] text-white' : 'bg-white text-[#000000]'}`}
+                            placeholder="MM/YY"
+                            keyboardType="numeric"
+                            value={expiry}
+                            onChangeText={setExpiry}
+                          />
+                        </View>
+                        <View style={tw`w-1/2 pl-2`}>
+
+                          <TextInput
+                            style={tw`border border-gray-300 p-3 ${dark ? 'bg-[#3D3D3D] text-white' : 'bg-white text-[#000000]'}`}
+                            placeholder="CVC"
+                            keyboardType="numeric"
+                            secureTextEntry
+                            value={cvc}
+                            onChangeText={setCvc}
+                          />
+                        </View>
+                      </View>
+                    </View>
+
+
+
+
+                  </View>
+                </View>
+                {/* Footer Buttons */}
+                <View style={tw`flex-row gap-2 justify-between p-4`}>
+                  <TouchableOpacity
+                    style={tw`py-3 px-8 w-[50%] text-center border border-gray-300 rounded-full`}
+                    onPress={() => setBoostmodal(false)}
+                  >
+
+                    <Text style={tw`text-lg font-semibold text-gray-600 text-center`}>Cancel</Text>
+                  </TouchableOpacity>
+
+
+
+                  <TouchableOpacity
+                    style={tw`bg-blue-500 py-3 px-8 rounded-full w-[50%]`}
+                    onPress={() => {
+                      console.log({
+                        days,
+                        cardNumber,
+                        expiry,
+                        cvc,
+                      });
+                      setBoostmodal(false);
+                    }}
+                  >
+                    <View style={tw`flex-row gap-2 items-center justify-center  text-center`}>
+                      <Image
+                        source={require('../../assets/images/boostWhite.png')}
+
+                        resizeMode="contain"
+                      />
+                      <Text style={tw`text-lg font-semibold text-white text-center`}>Boost</Text>
+                    </View>
+                  </TouchableOpacity>
+
+                </View>
+              </View>
+            </View>
+          </Modal>
+        )
+      }
     </ScrollView>
   );
 };
