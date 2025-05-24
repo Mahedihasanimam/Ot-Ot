@@ -1,8 +1,10 @@
 import tw from '@/assets/lib/tailwind'
+import { useNavigation } from 'expo-router'
 import React from 'react'
 import { Image, Text, TouchableOpacity, View } from 'react-native'
 
 const HomeHeader = () => {
+    const navigation = useNavigation<any>();
     return (
         <View style={tw`flex flex-row p-4 bg-primary text-white rounded-lg justify-between items-center`}>
 
@@ -19,7 +21,7 @@ const HomeHeader = () => {
             </View>
 
             <View style={tw`absolute top-4 right-4`}>
-                <TouchableOpacity>
+                <TouchableOpacity onPress={() => navigation.navigate('Notification')}>
                     <Image source={require('../../assets/images/notification.png')} />
                 </TouchableOpacity>
             </View>

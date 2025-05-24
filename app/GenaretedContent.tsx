@@ -29,15 +29,11 @@ const GenaretedContent = () => {
 
 
     return (
-        <ScrollView style={tw`bg-white`}>
+        <ScrollView style={tw`${dark ? 'bg-[#1E1E1E]' : 'bg-white'}`}>
             <BackButton title="Edit Content" />
-
-
-
             <View style={tw`p-4`}>
 
                 <Image source={require('@/assets/images/content.png')} style={tw`w-[282px] h-[282px] mx-auto my-4 `} />
-
                 <View style={tw`mt-6`}>
                     <Text style={tw`${dark ? 'text-white' : 'text-[#000]'} font-medium text-[16px]`}>Caption & Details</Text>
 
@@ -51,7 +47,6 @@ const GenaretedContent = () => {
                         onChangeText={setCaption}
                     />
                 </View>
-
 
                 <View style={tw`flex flex-row items-center justify-end  mt-6`}>
 
@@ -73,8 +68,6 @@ const GenaretedContent = () => {
                     </TouchableOpacity>
                 </View>
 
-
-
                 <View style={tw`flex-row justify-between mt-8 mb-10 `}>
                     <TouchableOpacity
                         style={tw`${dark ? 'bg-[#3D3D3D] ' : 'bg-white  '} border rounded-full p-4 border-[#00000033] flex-1 mr-2 items-center`}
@@ -91,7 +84,6 @@ const GenaretedContent = () => {
                 </View>
 
             </View>
-
             {
                 Boostmodal && (
                     <Modal
@@ -217,9 +209,6 @@ const GenaretedContent = () => {
                     </Modal>
                 )
             }
-
-
-
 
         </ScrollView>
     )
