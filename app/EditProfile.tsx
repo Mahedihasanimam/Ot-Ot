@@ -80,7 +80,7 @@ const EditProfile = () => {
                     />
                 </View>
 
-                <Button buttonStyle='mt-6 bg-[#007BFF] w-full p-5 text-center text-white rounded-full mt-[60%]' textStyle='text-[#FFFFFF] text-[18px] font-semibold text-center' label='Save' onPress={handleSubmit} />
+                <Button buttonStyle='mt-6 bg-[#007BFF] w-full p-5 text-center text-white rounded-full mt-[100%]' textStyle='text-[#FFFFFF] text-[18px] font-semibold text-center' label='Save' onPress={handleSubmit} />
             </View>
         </View>
     );
