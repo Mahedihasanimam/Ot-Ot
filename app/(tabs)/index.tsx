@@ -17,7 +17,7 @@ const HomeScreen = () => {
 
   return (
     <GestureHandlerRootView style={tw`flex-1 ${dark ? 'bg-[#3D3D3D]' : 'bg-white'}`}>
-      <ScrollView contentContainerStyle={tw`p-4 pt-8`}>
+      <ScrollView contentContainerStyle={tw`p-4 pt-12`}>
         <HomeHeader />
 
         {/* Upcoming posts */}

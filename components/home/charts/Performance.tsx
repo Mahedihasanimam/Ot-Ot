@@ -36,7 +36,7 @@ const PerformanceChart = () => {
                             <View style={tw`items-center`}>
                                 {/* Tooltip showing the header text */}
                                 {isActive && (
-                                    <View style={tw`absolute -top-18 ${dark ? 'bg-[#3D3D3D]' : 'bg-whitecolor'} px-3 py-2 rounded-md w-34 shadow-lg`}>
+                                    <View style={tw`absolute -top-18 ${dark ? 'bg-[#3D3D3D]' : 'bg-white'} px-3 py-2 rounded-md w-34 shadow-lg`}>
                                         <View style={tw`flex flex-row items-center justify-between gap-2`}>
                                             <View>
                                                 <Text style={tw`text-2xl`}>🙂</Text>
@@ -47,7 +47,7 @@ const PerformanceChart = () => {
                                                 <Text style={tw`${dark ? 'text-white' : 'text-title'} text-sm font-medium`}>April, 2025</Text>
                                             </View>
                                         </View>
-                                        <View style={tw`absolute -bottom-1 left-4 w-3 h-3 ${dark ? 'bg-[#3D3D3D]' : 'bg-whitecolor'} -ml-1.5 rotate-45`} />
+                                        <View style={tw`absolute -bottom-1 left-4 w-3 h-3 ${dark ? 'bg-[#3D3D3D]' : 'bg-white'} -ml-1.5 rotate-45`} />
                                     </View>
                                 )}
 
