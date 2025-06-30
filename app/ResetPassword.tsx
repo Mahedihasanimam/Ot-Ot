@@ -1,11 +1,13 @@
 import tw from '@/assets/lib/tailwind';
 import BackButtonOnlyIcon from '@/components/util/BackButtonOnlyIcon';
 import InputBox from '@/components/util/InputBox';
+import { useTheme } from '@react-navigation/native';
 import { useNavigation } from 'expo-router';
 import React, { useState } from 'react';
 import { Alert, Image, Text, TouchableOpacity, View } from 'react-native';
 
 const ResetPassword = () => {
+    const { colors, dark } = useTheme();
     const navigation = useNavigation<any>();
     const [formData, setFormData] = useState({
         newPassword: '',
@@ -41,7 +43,7 @@ const ResetPassword = () => {
     };
 
     return (
-        <View style={tw`flex-1 bg-white px-6 py-10`}>
+        <View style={tw`flex-1 ${dark ? 'bg-[#1E1E1E]' : 'bg-white'} px-6 py-10`}>
             <BackButtonOnlyIcon />
 
             {/* Logo */}
@@ -54,7 +56,7 @@ const ResetPassword = () => {
             </View>
 
             {/* Title */}
-            <Text style={tw`text-2xl text-[#121212] font-bold text-center mb-2`}>
+            <Text style={tw`text-2xl ${dark ? 'text-white' : 'text-[#121212]'} font-bold text-center mb-2`}>
                 Reset Password
             </Text>
             <Text style={tw`text-sm text-[#6D6D6D] text-center mb-6`}>
@@ -89,8 +91,8 @@ const ResetPassword = () => {
                     </TouchableOpacity>
                 }
                 secureTextEntry={!newPasswordVisible}
-                containerStyle="h-[50px] border border-black rounded-full px-4 my-2"
-                textStyle="text-base"
+                containerStyle="h-[50px] border border-black rounded-full px-4 my-2  border border-gray-300"
+                textStyle={dark ? 'text-white' : 'text-black'}
             />
 
             {/* Confirm Password */}
@@ -121,9 +123,9 @@ const ResetPassword = () => {
                     </TouchableOpacity>
                 }
                 secureTextEntry={!confirmPasswordVisible}
-                containerStyle={`h-[50px] border rounded-full px-4 my-2 ${passwordsMatch ? 'border-black' : 'border-red-500'
+                containerStyle={`h-[50px]  rounded-full px-4 my-2 border    ${passwordsMatch ? 'border-gray-300 ' : 'border-red-500'
                     }`}
-                textStyle="text-base"
+                textStyle={dark ? 'text-white' : 'text-black'}
             />
 
             {!passwordsMatch && formData.confirmPassword ? (

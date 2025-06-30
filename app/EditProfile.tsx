@@ -2,11 +2,13 @@ import tw from '@/assets/lib/tailwind';
 import BackButton from '@/components/util/BackButton';
 import Button from '@/components/util/Button';
 import { AntDesign, FontAwesome } from '@expo/vector-icons';
+import { useTheme } from '@react-navigation/native';
 import * as ImagePicker from 'expo-image-picker';
 import React, { useState } from 'react';
 import { Image, Text, TextInput, TouchableOpacity, View } from 'react-native';
 
 const EditProfile = () => {
+    const { colors, dark } = useTheme();
     const [image, setImage] = useState(null);
     const [name, setName] = useState('');
     const [phone, setPhone] = useState('');
@@ -39,7 +41,7 @@ const EditProfile = () => {
     };
 
     return (
-        <View style={tw`flex-1 bg-white  pt-6`}>
+        <View style={tw`flex-1 ${dark ? 'bg-[#121212]' : 'bg-white'}  pt-6`}>
             <BackButton title="Edit Profile" />
             <View style={tw`items-center mt-8 px-4`}>
                 <View style={tw`relative`}>
@@ -55,25 +57,25 @@ const EditProfile = () => {
                     </TouchableOpacity>
                 </View>
 
-                <Text style={tw`mt-3 font-medium text-base`}>Profile picture</Text>
+                <Text style={tw`mt-3 font-medium text-base ${dark ? 'text-white' : 'text-black'}`}>Profile picture</Text>
 
-                <View style={tw`flex-row items-center border border-gray-300 rounded-full px-4 py-2 w-full mt-6`}>
+                <View style={tw`flex-row items-center border border-gray-300 rounded-full px-4 py-2 w-full mt-6 ${dark ? 'bg-[#3D3D3D]' : 'bg-white'}`}>
                     <AntDesign name="user" size={20} color="#555" style={tw`mr-2`} />
                     <TextInput
                         value={name}
                         onChangeText={setName}
-                        style={tw`flex-1 text-base`}
+                        style={tw`flex-1 text-bas ${dark ? 'text-white' : 'text-black'}`}
                         placeholder="Name"
                         placeholderTextColor="#999"
                     />
                 </View>
 
-                <View style={tw`flex-row items-center border border-gray-300 rounded-full px-4 py-2 w-full mt-4`}>
+                <View style={tw`flex-row items-center border border-gray-300 rounded-full px-4 py-2 w-full mt-4 ${dark ? 'bg-[#3D3D3D]' : 'bg-white'}`}>
                     <FontAwesome name="phone" size={20} color="#555" style={tw`mr-2`} />
                     <TextInput
                         value={phone}
                         onChangeText={setPhone}
-                        style={tw`flex-1 text-base`}
+                        style={tw`flex-1 text-base ${dark ? 'text-white' : 'text-black'}`}
                         placeholder="Phone"
                         keyboardType="phone-pad"
                         placeholderTextColor="#999"

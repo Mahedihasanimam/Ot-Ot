@@ -181,11 +181,22 @@ const NotificationPreferences: React.FC<NotificationPreferencesProps> = () => {
                 <View style={tw`flex-row justify-between items-center pb-3`}>
                     <Text style={tw`text-[18px] font-medium ${dark ? 'text-white' : 'text-[#000000]'} `}>Quiet Hours</Text>
                     <Switch
+                        style={[
+                            tw`rounded-full `,
+                            {
+
+                                padding: 2,
+                                transform: [{ scaleX: 1.2 }, { scaleY: 1.2 }],
+                            },
+                        ]}
+
                         value={quietHours}
                         onValueChange={toggleQuietHours}
-                        thumbColor={quietHours ? '#007AFF' : '#f4f3f4'}
-                        trackColor={{ false: '#767577', true: '#007AFF' }}
+                        thumbColor={quietHours ? '#ffffff' : '#cccccc'} // more visible thumb
+                        trackColor={{ false: '#bbbbbb', true: '#007AFF' }} // smooth gray to blue
+                        ios_backgroundColor="#888888" // fallback bg for iOS when false
                     />
+
                 </View>
 
                 {quietHours && (
@@ -251,7 +262,7 @@ const NotificationPreferences: React.FC<NotificationPreferencesProps> = () => {
 const NotificationToggle: React.FC<NotificationToggleProps> = ({ label, value, onToggle, icon }) => {
     const { dark } = useTheme();
     return (
-        <View style={tw`flex-row justify-between items-center px-4 py-3 border border-[#00000033]  rounded-full mb-2 p-4 ${dark ? 'bg-[#3D3D3D]' : 'bg-white'}`}>
+        <View style={tw`flex-row justify-between items-center px-4 py-2 border border-[#00000033]  rounded-full mb-2  ${dark ? 'bg-[#3D3D3D]' : 'bg-white'}`}>
             <View style={tw`flex flex-row items-center`}>
                 {icon && <View style={tw`mr-2`}>{icon}</View>}
                 <Text style={tw`text-base font-medium ${dark ? 'text-white' : 'text-[#000000]'}`}>{label}</Text>

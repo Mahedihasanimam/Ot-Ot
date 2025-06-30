@@ -77,7 +77,7 @@ const Login = () => {
                     </TouchableOpacity>
                 }
                 secureTextEntry={!passwordVisible}
-                containerStyle="h-[50px] border border-gray-500 rounded-full px-4 my-2 ${"
+                containerStyle="h-[50px] border border-gray-500 rounded-full px-4 my-2 "
                 textStyle={dark ? 'text-white' : 'text-black'}
             />
 

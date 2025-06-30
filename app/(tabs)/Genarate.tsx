@@ -20,7 +20,7 @@ const Genarate = () => {
     };
 
     return (
-        <ScrollView contentContainerStyle={tw`px-4 py-6 ${dark ? 'bg-[#1E1E1E]' : 'bg-white'} min-h-full`}>
+        <ScrollView contentContainerStyle={tw`px-4  ${dark ? 'bg-[#1E1E1E]' : 'bg-white'} min-h-full`}>
             {/* Header Button */}
             <TouchableOpacity style={tw`bg-[#007BFF] p-4 rounded-full items-center my-6`}>
                 <Text style={tw`text-[#FFFFFF] text-base font-semibold`}>Ai Copy Generator</Text>

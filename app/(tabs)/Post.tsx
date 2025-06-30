@@ -257,7 +257,7 @@ const Post = () => {
                       <Text style={tw`text-[40px] pb-2 font-bold mb-2 text-center mt-4 ${dark ? 'text-white' : 'text-[#000000]'}`}>$0.00</Text>
                       <Text style={tw`text-[18px] font-normal mb-2 ${dark ? 'text-white' : 'text-[#000000]'} `}>For how many days?</Text>
                       <TextInput
-                        style={tw`border rounded-full p-4 border-gray-300  mt-2 text-lg ${dark ? 'bg-[#3D3D3D] text-white' : 'bg-white text-[#000000]'}`}
+                        style={tw`border rounded-full p-4   mt-2 text-lg ${dark ? 'bg-[#3D3D3D] text-white' : 'bg-white text-[#000000] border-gray-300'}`}
                         placeholder="Type here..."
                         keyboardType="numeric"
                         value={days}
@@ -275,7 +275,7 @@ const Post = () => {
 
                         <View style={tw`flex-row items-center`}>
                           <TextInput
-                            style={tw`flex-1 border border-gray-300 p-3 rounded-t-md ${dark ? 'bg-[#3D3D3D] text-white' : 'bg-white text-[#000000]'}`}
+                            style={tw`flex-1 p-3 rounded-t-md ${dark ? 'bg-[#3D3D3D] text-white' : 'bg-white text-[#000000]  border border-gray-300'}`}
                             placeholder="Card number"
                             keyboardType="numeric"
                             value={cardNumber}
@@ -293,7 +293,7 @@ const Post = () => {
                         <View style={tw`w-1/2 pr-2`}>
 
                           <TextInput
-                            style={tw`border border-gray-300 p-3 ${dark ? 'bg-[#3D3D3D] text-white' : 'bg-white text-[#000000]'}`}
+                            style={tw` p-3 ${dark ? 'bg-[#3D3D3D] text-white' : 'bg-white text-[#000000] border border-gray-300'}`}
                             placeholder="MM/YY"
                             keyboardType="numeric"
                             value={expiry}
@@ -303,7 +303,7 @@ const Post = () => {
                         <View style={tw`w-1/2 pl-2`}>
 
                           <TextInput
-                            style={tw`border border-gray-300 p-3 ${dark ? 'bg-[#3D3D3D] text-white' : 'bg-white text-[#000000]'}`}
+                            style={tw` p-3 ${dark ? 'bg-[#3D3D3D]  text-white' : 'bg-white text-[#000000] border border-gray-300'}`}
                             placeholder="CVC"
                             keyboardType="numeric"
                             secureTextEntry
@@ -322,11 +322,11 @@ const Post = () => {
                 {/* Footer Buttons */}
                 <View style={tw`flex-row gap-2 justify-between p-4`}>
                   <TouchableOpacity
-                    style={tw`py-3 px-8 w-[50%] text-center border border-gray-300 rounded-full`}
+                    style={tw`py-3 px-8 w-[50%] text-center ${dark ? 'bg-[#3D3D3D]' : 'bg-white border border-gray-300'} rounded-full`}
                     onPress={() => setBoostmodal(false)}
                   >
 
-                    <Text style={tw`text-lg font-semibold text-gray-600 text-center`}>Cancel</Text>
+                    <Text style={tw`text-lg font-semibold ${dark ? 'text-white' : 'text-gray-600'} text-center`}>Cancel</Text>
                   </TouchableOpacity>
 
 

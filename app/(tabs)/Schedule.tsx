@@ -61,7 +61,7 @@ const Schedule: React.FC = () => {
     }, []);
 
     const handleTimeChange = (
-        event: Event,
+        event: any,
         selectedTime: Date | undefined
     ) => {
         setShowTimePicker(false);
@@ -95,8 +95,8 @@ const Schedule: React.FC = () => {
             <TouchableOpacity
                 onPress={() => setSelectedDate(date.dateString)}
                 style={tw.style(
-                    'w-10 h-10 justify-center items-center bg-[#F6F6F6] ',
-                    isSelected ? 'bg-[#007BFF] rounded-full' : 'bg-[#F6F6F6]'
+                    'w-10 h-10 justify-center items-center bg-transparent',
+                    isSelected ? 'bg-[#007BFF] rounded-full' : 'bg-[#F6F6F6] rounded-full'
                 )}
             >
                 <Text
@@ -106,7 +106,7 @@ const Schedule: React.FC = () => {
                             ? 'text-white'
                             : state === 'disabled'
                                 ? 'text-gray-400'
-                                : 'text-black'
+                                : dark ? 'text-[#1D1B20]' : 'text-black'
                     )}
                 >
                     {date.day}
@@ -115,41 +115,52 @@ const Schedule: React.FC = () => {
         );
     };
 
+    const calendarTheme = {
+        backgroundColor: dark ? '#1E1E1E' : '#F6F6F6',
+        calendarBackground: dark ? '#1E1E1E' : '#F6F6F6',
+        textSectionTitleColor: dark ? '#A0A0A0' : '#888888',
+        selectedDayBackgroundColor: '#007BFF',
+        selectedDayTextColor: '#FFFFFF',
+        todayTextColor: '#007BFF',
+        dayTextColor: dark ? '#FFFFFF' : '#2D4150',
+        textDisabledColor: dark ? '#555555' : '#DDDDDD',
+        arrowColor: dark ? '#FFFFFF' : '#007BFF',
+        monthTextColor: dark ? '#FFFFFF' : '#2D4150',
+        indicatorColor: dark ? '#FFFFFF' : '#007BFF',
+        textDayFontWeight: '300',
+        textMonthFontWeight: 'bold',
+        textDayHeaderFontWeight: '300',
+        textDayFontSize: 14,
+        textMonthFontSize: 16,
+        textDayHeaderFontSize: 14
+    };
+
     return (
         <ScrollView style={tw`p-4 ${dark ? 'bg-[#1E1E1E]' : 'bg-white'}`}>
             <Button
                 label="Social Media Schedule"
                 onPress={() => { }}
-                buttonStyle='bg-primary py-4 mt-8 rounded-full mx-4'
+                buttonStyle='bg-primary py-4  rounded-full mx-4'
                 textStyle='text-white text-center text-[18px] font-semibold'
             />
 
             {/* Header */}
-            <View style={tw`border-b border-[#D9D9D9] bg-[#F6F6F6] p-4 rounded-t-[30px] mt-4`}>
-                <Text style={tw`text-lg font-medium mt-1 text-[#1D1B20] text-[24px]`}>
+            <View style={tw`border-b ${dark ? 'border-[#444]' : 'border-[#da6464]'} ${dark ? 'bg-[#2D2D2D]' : 'bg-[#F6F6F6]'} p-4 rounded-t-[30px] mt-4`}>
+                <Text style={tw`text-lg font-medium mt-1 ${dark ? 'text-white' : 'text-[#1D1B20]'} text-[24px]`}>
                     {formatDisplayDate(selectedDate)}
                 </Text>
             </View>
 
-            {/* Real Calendar */}
-            <View style={tw`p-4 bg-[#F6F6F6] rounded-b-[30px]`}>
+            {/* Calendar */}
+            <View style={tw`p-4 ${dark ? 'bg-[#2D2D2D]' : 'bg-[#F6F6F6]'} rounded-b-[30px]`}>
                 <CalendarUI
-                    style={tw`bg-[#F6F6F6]`}
+                    style={tw`${dark ? 'bg-[#2D2D2D] text-[#1D1B20]' : 'bg-[#F6F6F6]'} rounded-[30px]`}
                     current={selectedDate}
                     onDayPress={(day) => setSelectedDate(day.dateString)}
                     markedDates={{
                         [selectedDate]: { selected: true, selectedColor: '#007BFF' },
                     }}
-                    theme={{
-                        backgroundColor: '#F6F6F6',
-                        calendarBackground: '#F6F6F6',
-                        textSectionTitleColor: '#333',
-                        selectedDayTextColor: '#fff',
-                        todayTextColor: 'red',
-                        arrowColor: 'blue',
-                        textDayFontWeight: '500',
-                        textMonthFontWeight: 'bold',
-                    }}
+                    theme={calendarTheme}
                     dayComponent={renderDayComponent}
                 />
             </View>
@@ -157,8 +168,8 @@ const Schedule: React.FC = () => {
             <View style={tw`my-4`} />
 
             {/* Posting Frequency */}
-            <View style={tw`mb-6 bg-white p-4 rounded-lg shadow-md`}>
-                <Text style={tw`text-lg font-bold mb-3`}>Posting Frequency</Text>
+            <View style={tw`mb-6 ${dark ? 'bg-[#2D2D2D]' : 'bg-white'} p-4 rounded-lg shadow-md`}>
+                <Text style={tw`text-lg font-bold mb-3 ${dark ? 'text-white' : 'text-[#1D1B20]'}`}>Posting Frequency</Text>
 
                 <View style={tw`flex-row justify-between mb-4`}>
                     {(['Daily', 'Weekly', 'Custom'] as const).map((option) => (
@@ -167,12 +178,20 @@ const Schedule: React.FC = () => {
                             onPress={() => setFrequency(option)}
                             style={tw.style(
                                 'px-8 py-3 rounded-full',
-                                frequency === option ? 'bg-blue-500' : 'bg-gray-100'
+                                frequency === option
+                                    ? 'bg-blue-500'
+                                    : dark
+                                        ? 'bg-[#3D3D3D]'
+                                        : 'bg-gray-100'
                             )}
                         >
                             <Text style={tw.style(
                                 'font-medium',
-                                frequency === option ? 'text-white' : 'text-gray-800'
+                                frequency === option
+                                    ? 'text-white'
+                                    : dark
+                                        ? 'text-white'
+                                        : 'text-gray-800'
                             )}>
                                 {option}
                             </Text>
@@ -181,16 +200,29 @@ const Schedule: React.FC = () => {
                 </View>
 
                 <View style={tw`flex-row items-center`}>
-                    <Text style={tw`font-medium text-[#1D1B20] text-[16px] mr-2`}>Best time:</Text>
+                    <Text style={tw`font-medium ${dark ? 'text-white' : 'text-[#1D1B20]'} text-[16px] mr-2`}>Best time:</Text>
                     <TouchableOpacity
                         onPress={() => frequency === 'Custom' && setShowTimePicker(true)}
                         style={tw.style(
-                            'bg-[#007BFF] px-8 py-3 rounded-full',
+                            'px-8 py-3 rounded-full',
+                            frequency === 'Custom'
+                                ? 'bg-[#007BFF]'
+                                : dark
+                                    ? 'bg-[#3D3D3D]'
+                                    : 'bg-gray-100',
                             frequency !== 'Custom' && 'opacity-50'
                         )}
                         disabled={frequency !== 'Custom'}
                     >
-                        <Text style={tw`text-white`}>{formatTime(bestTime)}</Text>
+                        <Text style={tw.style(
+                            frequency === 'Custom'
+                                ? 'text-white'
+                                : dark
+                                    ? 'text-white'
+                                    : 'text-gray-800'
+                        )}>
+                            {formatTime(bestTime)}
+                        </Text>
                     </TouchableOpacity>
                 </View>
 
@@ -200,27 +232,36 @@ const Schedule: React.FC = () => {
                         mode="time"
                         display={Platform.OS === 'ios' ? 'spinner' : 'default'}
                         onChange={handleTimeChange}
+                        themeVariant={dark ? 'dark' : 'light'}
                     />
                 )}
             </View>
 
-            <View style={tw``} />
-
             {/* Upcoming Posts */}
             <View style={tw`mb-4`}>
-                <Text style={tw`text-lg font-bold mb-3`}>Upcoming posts</Text>
+                <Text style={tw`text-lg font-bold mb-3 ${dark ? 'text-white' : 'text-[#1D1B20]'}`}>Upcoming posts</Text>
 
                 {upcomingPosts.map((post) => (
                     <TouchableOpacity
                         key={post.id}
                         onPress={() => togglePostSelection(post.id)}
                         style={tw.style(
-                            'p-3 mb-3 border rounded-lg',
-                            post.selected ? 'border-blue-500 bg-blue-50' : 'border-gray-200 bg-white'
+                            `p-3 mb-3 border rounded-lg`,
+                            post.selected
+                                ? dark
+                                    ? 'border-blue-400 bg-[#2C3E50]'
+                                    : 'border-blue-500 bg-blue-50'
+                                : dark
+                                    ? 'border-gray-700 bg-[#3D3D3D]'
+                                    : 'border-gray-200 bg-white'
                         )}
                     >
-                        <Text style={tw`text-[#888888] text-sm`}>{post.time}</Text>
-                        <Text style={tw`mt-1 text-[#000000] text-[16px]`}>{post.content}</Text>
+                        <Text style={tw.style(`text-sm`, dark ? 'text-gray-300' : 'text-[#888888]')}>
+                            {post.time}
+                        </Text>
+                        <Text style={tw.style(`mt-1 text-[16px]`, dark ? 'text-white' : 'text-black')}>
+                            {post.content}
+                        </Text>
                     </TouchableOpacity>
                 ))}
             </View>

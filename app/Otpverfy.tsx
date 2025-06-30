@@ -1,10 +1,12 @@
 import tw from '@/assets/lib/tailwind';
 import BackButtonOnlyIcon from '@/components/util/BackButtonOnlyIcon';
+import { useTheme } from '@react-navigation/native';
 import { useNavigation } from 'expo-router';
 import React, { useEffect, useRef, useState } from 'react';
 import { Image, Text, TextInput, TouchableOpacity, View } from 'react-native';
 
 const OtpVerify = () => {
+    const { dark } = useTheme();
     const navigation = useNavigation<any>();
     const [otp, setOtp] = useState<string[]>(['', '', '', '', '', '']);
     const [countdown, setCountdown] = useState(60);
@@ -57,7 +59,7 @@ const OtpVerify = () => {
     };
 
     return (
-        <View style={tw`flex-1 bg-white px-6 py-10`}>
+        <View style={tw`flex-1 ${dark ? 'bg-[#1E1E1E]' : 'bg-white'} px-6 py-10`}>
             <BackButtonOnlyIcon />
 
             {/* Logo */}
@@ -70,10 +72,10 @@ const OtpVerify = () => {
             </View>
 
             {/* Title */}
-            <Text style={tw`text-2xl text-[#121212] font-bold text-center mb-2`}>
+            <Text style={tw`text-2xl ${dark ? 'text-white' : 'text-[#121212]'} font-bold text-center mb-2`}>
                 Enter OTP
             </Text>
-            <Text style={tw`text-sm text-[#000000] font-normal text-center mb-6`}>
+            <Text style={tw`text-sm ${dark ? 'text-white' : 'text-[#000000]'} font-normal text-center mb-6`}>
                 It must be different from your previous password.
             </Text>
 
@@ -83,7 +85,7 @@ const OtpVerify = () => {
                     <TextInput
                         key={index}
                         ref={(ref) => (inputRefs.current[index] = ref)}
-                        style={tw`w-12 h-12 border border-gray-300 rounded-lg text-center text-lg`}
+                        style={tw`w-12 h-12 ${dark ? 'bg-[#3D3D3D] text-white' : ' border border-gray-300  bg-white text-[#121212]'}  rounded-lg text-center text-lg`}
                         keyboardType="numeric"
                         maxLength={1}
                         value={otp[index]}

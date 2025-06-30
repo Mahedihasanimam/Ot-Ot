@@ -1,10 +1,11 @@
 import tw from '@/assets/lib/tailwind';
 import Button from '@/components/util/Button';
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useTheme } from '@react-navigation/native';
 import React, { useEffect, useRef } from 'react';
 import { Animated, View } from 'react-native';
 
 const PasswordChangeSuccess: React.FC = () => {
+    const { dark } = useTheme();
     const navigation = useNavigation<any>();
 
 
@@ -23,11 +24,15 @@ const PasswordChangeSuccess: React.FC = () => {
                 friction: 5,
                 useNativeDriver: true,
             }),
-        ]).start();
+        ]).start(() => {
+
+            navigation.replace("Login");
+        });
     }, [fadeAnim, scaleAnim]);
 
+
     return (
-        <View style={tw`flex-1 items-center justify-center px-4 bg-white`}>
+        <View style={tw`flex-1 items-center justify-center px-4 ${dark ? 'bg-[#1E1E1E]' : 'bg-white'}`}>
             <Animated.Image
                 source={require('@/assets/images/success.png')}
                 style={[

@@ -5,15 +5,19 @@ import { Stack } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import 'react-native-reanimated';
 
+import tw from '@/assets/lib/tailwind';
 import { ThemeProvider, useThemeContext } from '@/hooks/ThemeContext';
 import { useEffect } from 'react';
-import { Platform } from 'react-native';
+import { Platform, SafeAreaView } from 'react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 function ThemedApp() {
   const { theme } = useThemeContext();
   const [loaded] = useFonts({
     SpaceMono: require('../assets/fonts/SpaceMono-Regular.ttf'),
   });
+
+  const { bottom, top } = useSafeAreaInsets()
 
   useEffect(() => {
     if (Platform.OS === 'android') {
@@ -31,13 +35,20 @@ function ThemedApp() {
   }
 
   return (
-    <NavThemeProvider value={theme === 'dark' ? DarkTheme : DefaultTheme}>
-      <StatusBar style={theme === 'dark' ? 'light' : 'dark'} />
-      <Stack screenOptions={{ headerShown: false }}>
-        <Stack.Screen name="InitialScreen" options={{ headerShown: false }} />
-        <Stack.Screen name="+not-found" />
-      </Stack>
-    </NavThemeProvider>
+    <SafeAreaView style={[tw`flex-1`, {
+      paddingBottom: bottom,
+      paddingTop: top,
+      backgroundColor: theme === 'dark' ? '#1a1a1a' : '#ffffff'
+    }]}>
+
+      <NavThemeProvider value={theme === 'dark' ? DarkTheme : DefaultTheme}>
+        <StatusBar style={theme === 'dark' ? 'light' : 'dark'} />
+        <Stack screenOptions={{ headerShown: false, statusBarStyle: theme === 'dark' ? 'light' : 'dark' }}>
+          <Stack.Screen name="InitialScreen" options={{ headerShown: false }} />
+          <Stack.Screen name="+not-found" />
+        </Stack>
+      </NavThemeProvider>
+    </SafeAreaView>
   );
 }
 

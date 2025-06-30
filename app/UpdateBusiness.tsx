@@ -12,7 +12,7 @@ const UpdateBusiness = () => {
         Alert.alert('Success', 'Business updated successfully!');
     }
     return (
-        <ScrollView style={tw`flex-1 ${dark ? 'bg-[#1E1E1E]' : 'bg-white'} mt-8`}>
+        <ScrollView style={tw`flex-1 ${dark ? 'bg-[#1E1E1E]' : 'bg-white'} `}>
             <BackButton title="Update Business" />
 
             <View style={tw`p-4 ${dark ? 'bg-[#1E1E1E]' : 'bg-white'}`}>
